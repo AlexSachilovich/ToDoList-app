@@ -1,1 +1,1 @@
-# ToDoList-app
+# mentoring-simple-webpack-starter
