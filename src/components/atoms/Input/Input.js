@@ -1,12 +1,18 @@
 import { Component } from "../../../core"
+import { debounce } from "../../../utils/debounce"
 export class Input extends Component {
     constructor(){
         super()
         this.state = {
-            value: ""
+             value: ""
         }
+        this.onInput = this.onInput.bind(this)
     }
 
+
+    componentDidMount (){
+        this.addEventListener('input', debounce(this.onInput, 300))
+    }
 
     componentWillUpdate(name, oldValue, newValue) {
         if (name === 'value') {
@@ -22,6 +28,13 @@ export class Input extends Component {
     static get observedAttributes(){
         return['type', 'placeholder', 'value']
     }
+
+
+    onInput(evt) {
+        this.dispatch('custom-input', {value: evt.target.value})
+    }
+
+
     render() {
         return `
             <input 
