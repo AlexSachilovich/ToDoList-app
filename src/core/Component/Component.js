@@ -1,45 +1,41 @@
 export class Component extends HTMLElement {
-    constructor(){
+    constructor() {
         super()
-        this.state = {}
         this.props = {}
+        this.state = {}
     }
-    setState(callback){
+
+
+    setState(callback) {
         this.state = callback(this.state)
         this.innerHTML = this.render()
-        .toString()
-        .trim()
-        .replaceAll(/true | false/gi, "")
-        .replaceAll(",", "")
     }
 
-
-    connectedCallback(){
+    connectedCallback() {
         this.innerHTML = this.render()
-        .trim()
-        .replaceAll(/true | false/gi, "")
-        .replaceAll(",", "")
         this.componentDidMount()
-        this.registerEvents()
     }
-    disconnectedCallback(){
+
+    disconnectedCallback() {
         this.componentWillUnMount()
     }
 
-    attributeChangedCallback(name, oldValue, newValue){
+    attributeChangedCallback(name, oldValue, newValue) {
         this.componentWillUpdate(name, oldValue, newValue)
-        this.getAttributeNames().forEach(()=> {
+        this.getAttributeNames().forEach((name) => {
             this.props[name] = this.getAttribute(name)
         })
     }
 
-
-    dispatch(type, props){
-        this.dispatchEvent(new CustomEvent(type, {bubbles: true, detail: props}))
+    dispatch(type, props) {
+        this.dispatchEvent(new CustomEvent(type, { bubbles: true, detsil: props }))
     }
-    registerEvents(){}
+
+    render(){}
     componentDidMount(){}
-    componentWillUpdate(){}
     componentWillUnMount(){}
-    render() {}
+    componentWillUpdate(){}
+
 }
+
+

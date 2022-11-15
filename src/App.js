@@ -4,32 +4,11 @@ import './components/Button/Button'
 
 export class App extends Component {
 
-  constructor(){
-    super()
-    this.state = {
-      isLoading: false,
-      value : ""
-    }
-  }
-
-  registerEvents(){
-    this.addEventListener('change', (evt) => {
-      if(evt.target.closest('.form-control')) {
-        this.setState((state) => {
-          return {
-            ...state,
-            value: evt.target.value
-          }
-        })
-      }
-    })
-  }
-
     render(){
         return `
         <div class='container mt-5'>
         <div class="input-group mb-3">
-          <input value='${this.state.value}'  type="text" class="form-control" placeholder="Add a new task" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <input type="text" class="form-control" placeholder="Add a new task" aria-label="Recipient's username" aria-describedby="button-addon2">
           <button class="btn btn-outline-primary" type="button" id="button-addon2">save</button>
         </div>
         <ul class="list-group">
@@ -42,8 +21,8 @@ export class App extends Component {
                   </label>
                 </div>
                 <div class='d-flex'>
-                  <my-button content="Delete"  classname="btn btn-danger btn-sm"></my-button>
-                  <my-button content="Update"  classname="btn btn-primary btn-sm"></my-button>
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                  <button type="button" class="btn btn-primary btn-sm">Update</button>
                 </div>
             </div>
           </li>
