@@ -28,7 +28,7 @@ export class Component extends HTMLElement {
     }
 
     dispatch(type, props) {
-        this.dispatchEvent(new CustomEvent(type, { bubbles: true, detsil: props }))
+        this.dispatchEvent(new CustomEvent(type, { bubbles: true, detail: props }))
     }
 
     render(){}
