@@ -1,49 +1,38 @@
 import { Component } from "../../../core";
-import {todoList} from '../../../services/todoList/todoList'
-import '../../atoms/Button/Button'
-import '../../atoms/Input/Input'
+
+export class InputGroup extends Component {
 
 
-
-
-
-export class InputGroup extends Component { 
-
-    constructor() {
-        super()
-        this.state = {
-            inputValue: ""
-        }
-    }
-
-
-    onSave() {
-        if(this.state.inputValue) {
-                todoList.createTask
-        }
-    }
-    onInput(evt){
-        this.setState((state) => {
-            return {
-                ...state,
-                inputValue: evt.detail.value
-            }
+    onSubmit = (evt) => {
+        evt.preventDefault()
+        const task = {}
+        const data = new FormData(evt.target)
+        data.forEach((value, key)=>{
+            task[key] = value
         })
-    }
-
-    componentDidMount() {
-        this.addEventListener('save-task', this.onSave)
-        this.addEventListener('custom-input', this.onInput)
+        this.dispatch('save-task', task)
     }
 
 
+    componentDidMount(){
+        this.addEventListener('submit', this.onSubmit)
+    }
 
-    render(){
+    componentWillUnmount(){
+        this.removeEventListener('submit', this.onSubmit)
+    }
+
+    render() {
         return `
-        <div class="input-group mb-3">
-            <my-input value="${this.state.inputValue}" placeholder="Add a new task" type="text"></my-input>
-            <button class="btn btn-outline-primary" type="button" id="button-addon2">save</button>
-        </div>
+        <form class="input-group mb-3">
+        <input
+            name="title"
+            type="text" 
+            class="form-control" 
+            placeholder="Add a new task"
+        />
+          <button type="submit" class="btn btn btn-outline-primary" >Save</button>
+        </form>
         `
     }
 }
