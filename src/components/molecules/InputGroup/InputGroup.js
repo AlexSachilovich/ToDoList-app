@@ -22,6 +22,11 @@ export class InputGroup extends Component {
         this.removeEventListener('submit', this.onSubmit)
     }
 
+
+    static get observedAttributes(){
+        return ['type']
+    }
+
     render() {
         return `
         <form class="input-group mb-3">
